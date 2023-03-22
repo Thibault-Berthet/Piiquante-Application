@@ -1,3 +1,13 @@
+Hi,
+
+This is the fifth project that i did as part of my training to become web developer. The project was about learning and using JavaScript for backend.
+
+If you watch it, first of all thank you ! And feel free to contact me about some part of the code ;)
+
+I wish you a nice day or evening,
+
+Thibault
+
 # HotTakes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
