@@ -76,9 +76,54 @@ exports.getAllSauce = (req, res, next) => {
 exports.likeDislike = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
+            const {userId,like} = req.body
 
-            
+            if(like === 1 && !sauce.usersLiked.includes(userId)){
+                Sauce.updateOne({ _id : req.params.id},{
+                    $inc: {likes: 1},
+                    $push: { usersLiked: userId}
+                })
+                    .then(() => {res.status(200).json({message: 'Like accepted'})})
+                    .catch(error => res.status(500).json({ error }))
+            }
+
+            if(like === 0 && sauce.usersLiked.includes(userId)){
+                Sauce.updateOne({ _id : req.params.id},{
+                    $inc: {likes: -1},
+                    $pull: { usersLiked: userId}
+                })
+                    .then(() => {res.status(200).json({message: 'Like accepted'})})
+                    .catch(error => res.status(500).json({ error }))
+            }
+
+            if(like === -1 && !sauce.usersDisliked.includes(userId)){
+                Sauce.updateOne({ _id : req.params.id},{
+                    $inc: {dislikes: 1},
+                    $push: { usersDisliked: userId}
+                })
+                    .then(() => {res.status(200).json({message: 'Like accepted'})})
+                    .catch(error => res.status(500).json({ error }))
+            }
+
+            if(like === 0 && sauce.usersDisliked.includes(userId)){
+                Sauce.updateOne({ _id : req.params.id},{
+                    $inc: {dislikes: -1},
+                    $pull: { usersDisliked: userId}
+                })
+                    .then(() => {res.status(200).json({message: 'Like accepted'})})
+                    .catch(error => res.status(500).json({ error }))
+            }
 
         })
         .catch(error => res.status(404).json({ error }))
 }
+
+// Req ou res est toujours avec body, params, header
+// Stocker req.body.userId dans une variable
+// et req.body.like
+
+// PersonModel.update(
+//     { _id: person._id }, 
+//     { $push: { friends: friend } },
+//     done
+// );
