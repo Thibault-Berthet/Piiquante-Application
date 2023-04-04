@@ -1,8 +1,10 @@
 /* ------------ JS du serveur ------------ */
 
+// Importation du protocole HTTP et du fichier app.js
 const http = require('http')
 const app = require('./app')
 
+// Selection d'un port de connexion valide
 const normalizePort = val => {
   const port = parseInt(val, 10)
   if (isNaN(port)) {
@@ -13,9 +15,10 @@ const normalizePort = val => {
   }
   return false
 }
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port)
 
+// Gestion d'erreur du serveur
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error
@@ -36,6 +39,7 @@ const errorHandler = error => {
   }
 };
 
+// Création du server
 const server = http.createServer(app)
 
 server.on('error', errorHandler)

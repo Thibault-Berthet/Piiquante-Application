@@ -1,11 +1,16 @@
+/* ------------ JS de la gestion des images avec multer ------------ */
+
+// Importation des outils
 const multer = require('multer')
 
+// Importation des formats
 const MIME_TYPES = {
     'image/jpg':  'jpg',
     'image/jpeg': 'jpeg',
     'image/png':  'png'
 }
 
+// Changement du nom du fichier
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images')

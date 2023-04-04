@@ -1,5 +1,9 @@
+/* ------------ JS du modèle sauces ------------ */
+
+// Importation des outils
 const mongoose = require('mongoose')
 
+// Schema des données d'une sauce
 const sauceSchema = mongoose.Schema({
     userId: { type: String, required : true },
     name : { type : String, required : true },

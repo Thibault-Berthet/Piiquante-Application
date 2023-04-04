@@ -1,5 +1,9 @@
+/* ------------ JS de la création du token d'authentification ------------ */
+
+// Importation des outils
 const jwt = require('jsonwebtoken')
 
+// Verification du bon token
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1]
@@ -8,7 +12,7 @@ module.exports = (req, res, next) => {
         req.auth = {
             userId: userId
         }
-    next()
+        next()
     } catch(error) {
         res.status(401).json({ error })
     }

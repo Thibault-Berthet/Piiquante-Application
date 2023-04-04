@@ -1,7 +1,10 @@
+/* ------------ JS des controllers sauces ------------ */
+
+// Importation des outils
 const Sauce = require('../models/Sauce')
 const fs = require('fs')
 
-// Création d'une sauce
+// Création d'une sauce avec POST
 exports.createSauce = (req, res, next) => {
     const sauceObjet = JSON.parse(req.body.sauce)
     delete sauceObjet._id
@@ -12,15 +15,15 @@ exports.createSauce = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
         likes: 0,
         dislikes: 0,
-        usersLiked: [' '],
-        usersDisliked: [' ']
+        usersLiked: [],
+        usersDisliked: []
     })
     sauce.save()
         .then(() => res.status(201).json({ message : 'Sauce created' }))
         .catch((error) => res.status(400).json({ error }))
 }
 
-// Modification d'une sauce
+// Modification d'une sauce avec PUT
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
@@ -42,7 +45,7 @@ exports.modifySauce = (req, res, next) => {
         })
 }
 
-// Suppression d'une sauce
+// Suppression d'une sauce avec DELETE
 exports.deleteSauce= (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then(sauce => {
@@ -59,20 +62,21 @@ exports.deleteSauce= (req, res, next) => {
         .catch( error => res.status(500).json({ error }))
 }
 
-// Récuperation d'une sauce
+// Récuperation d'une sauce avec GET
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => res.status(200).json( sauce ))
       .catch(error => res.status(404).json({ error }))
 }
 
-// Récuperation de toutes les sauces
+// Récuperation de toutes les sauces avec GET
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
       .then(sauces => res.status(200).json( sauces ))
       .catch(error => res.status(404).json({ error }))
 }
 
+// Modification des likes dislikes avec POST
 exports.likeDislike = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
@@ -117,13 +121,3 @@ exports.likeDislike = (req, res, next) => {
         })
         .catch(error => res.status(404).json({ error }))
 }
-
-// Req ou res est toujours avec body, params, header
-// Stocker req.body.userId dans une variable
-// et req.body.like
-
-// PersonModel.update(
-//     { _id: person._id }, 
-//     { $push: { friends: friend } },
-//     done
-// );
