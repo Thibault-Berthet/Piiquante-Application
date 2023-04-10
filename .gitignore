@@ -41,5 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Images
-/backend/images
+# Ignore les fichiers images aux formats jpeg, jpg et png
+*.jpeg
+*.jpg
+*.png
