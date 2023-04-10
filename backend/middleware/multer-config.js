@@ -10,7 +10,7 @@ const MIME_TYPES = {
     'image/png':  'png'
 }
 
-// Changement du nom du fichier
+// Stockage et changement du nom du fichier
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images')
