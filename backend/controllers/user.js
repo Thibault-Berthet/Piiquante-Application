@@ -21,9 +21,9 @@ passwordSchema
 exports.signup = (req, res, next) => {
     // Validation de l'email avec email validator et du mot de passe avec password validator
     if(!emailValidator.validate(req.body.email)) {              
-        res.status(400).json({ message : 'Unauthorized request'})
+        res.status(400).json({ message : 'Unvalid syntax of the email'})
     } else if (!passwordSchema.validate(req.body.password)) {
-        res.status(400).json({ message : 'Unauthorized request'})
+        res.status(400).json({ message : 'Unvalid syntax of the password'})
     } else {
         // Cryptage du mot de passe et sauvegarde de l'utilisateur
         bcrypt.hash(req.body.password, 10)
