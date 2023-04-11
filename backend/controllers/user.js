@@ -21,9 +21,9 @@ passwordSchema
 exports.signup = (req, res, next) => {
     // Validation de l'email avec email validator et du mot de passe avec password validator
     if(!emailValidator.validate(req.body.email)) {              
-        throw  "Email not correct"
+        res.status(400).json({ message : 'Unauthorized request'})
     } else if (!passwordSchema.validate(req.body.password)) {
-        throw  "Password not correct"
+        res.status(400).json({ message : 'Unauthorized request'})
     } else {
         // Cryptage du mot de passe et sauvegarde de l'utilisateur
         bcrypt.hash(req.body.password, 10)

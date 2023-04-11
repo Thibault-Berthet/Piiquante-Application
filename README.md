@@ -4,6 +4,12 @@ This is the fifth project that i did as part of my training to become web develo
 
 If you watch it, first of all thank you ! And feel free to contact me about some part of the code ;)
 
+To launch the project you will have to do 3 things :
+- Open a console, go to the main folder and type "npm start"
+- Open another console, go to the folder backend and type "node server"
+- After this two steps go to this adress `http://localhost:4200/` 
+Everything should work ;)
+
 I wish you a nice day or evening,
 
 Thibault
